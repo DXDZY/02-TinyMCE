@@ -57,7 +57,72 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\content.css" />
     <Content Include="index.aspx" />
+    <Content Include="plugins\advlist\plugin.min.js" />
+    <Content Include="plugins\anchor\plugin.min.js" />
+    <Content Include="plugins\autolink\plugin.min.js" />
+    <Content Include="plugins\autoresize\plugin.min.js" />
+    <Content Include="plugins\autosave\plugin.min.js" />
+    <Content Include="plugins\bbcode\plugin.min.js" />
+    <Content Include="plugins\charmap\plugin.min.js" />
+    <Content Include="plugins\codesample\css\prism.css" />
+    <Content Include="plugins\codesample\plugin.min.js" />
+    <Content Include="plugins\code\plugin.min.js" />
+    <Content Include="plugins\colorpicker\plugin.min.js" />
+    <Content Include="plugins\contextmenu\plugin.min.js" />
+    <Content Include="plugins\directionality\plugin.min.js" />
+    <Content Include="plugins\emoticons\img\smiley-cool.gif" />
+    <Content Include="plugins\emoticons\img\smiley-cry.gif" />
+    <Content Include="plugins\emoticons\img\smiley-embarassed.gif" />
+    <Content Include="plugins\emoticons\img\smiley-foot-in-mouth.gif" />
+    <Content Include="plugins\emoticons\img\smiley-frown.gif" />
+    <Content Include="plugins\emoticons\img\smiley-innocent.gif" />
+    <Content Include="plugins\emoticons\img\smiley-kiss.gif" />
+    <Content Include="plugins\emoticons\img\smiley-laughing.gif" />
+    <Content Include="plugins\emoticons\img\smiley-money-mouth.gif" />
+    <Content Include="plugins\emoticons\img\smiley-sealed.gif" />
+    <Content Include="plugins\emoticons\img\smiley-smile.gif" />
+    <Content Include="plugins\emoticons\img\smiley-surprised.gif" />
+    <Content Include="plugins\emoticons\img\smiley-tongue-out.gif" />
+    <Content Include="plugins\emoticons\img\smiley-undecided.gif" />
+    <Content Include="plugins\emoticons\img\smiley-wink.gif" />
+    <Content Include="plugins\emoticons\img\smiley-yell.gif" />
+    <Content Include="plugins\emoticons\plugin.min.js" />
+    <Content Include="plugins\example\dialog.html" />
+    <Content Include="plugins\example\plugin.min.js" />
+    <Content Include="plugins\example_dependency\plugin.min.js" />
+    <Content Include="plugins\fullpage\plugin.min.js" />
+    <Content Include="plugins\fullscreen\plugin.min.js" />
+    <Content Include="plugins\hr\plugin.min.js" />
+    <Content Include="plugins\imagetools\plugin.min.js" />
+    <Content Include="plugins\image\plugin.min.js" />
+    <Content Include="plugins\importcss\plugin.min.js" />
+    <Content Include="plugins\insertdatetime\plugin.min.js" />
+    <Content Include="plugins\layer\plugin.min.js" />
+    <Content Include="plugins\legacyoutput\plugin.min.js" />
+    <Content Include="plugins\link\plugin.min.js" />
+    <Content Include="plugins\lists\plugin.min.js" />
+    <Content Include="plugins\media\moxieplayer.swf" />
+    <Content Include="plugins\media\plugin.min.js" />
+    <Content Include="plugins\nonbreaking\plugin.min.js" />
+    <Content Include="plugins\noneditable\plugin.min.js" />
+    <Content Include="plugins\pagebreak\plugin.min.js" />
+    <Content Include="plugins\paste\plugin.min.js" />
+    <Content Include="plugins\preview\plugin.min.js" />
+    <Content Include="plugins\print\plugin.min.js" />
+    <Content Include="plugins\save\plugin.min.js" />
+    <Content Include="plugins\searchreplace\plugin.min.js" />
+    <Content Include="plugins\spellchecker\plugin.min.js" />
+    <Content Include="plugins\tabfocus\plugin.min.js" />
+    <Content Include="plugins\table\plugin.min.js" />
+    <Content Include="plugins\template\plugin.min.js" />
+    <Content Include="plugins\textcolor\plugin.min.js" />
+    <Content Include="plugins\textpattern\plugin.min.js" />
+    <Content Include="plugins\visualblocks\css\visualblocks.css" />
+    <Content Include="plugins\visualblocks\plugin.min.js" />
+    <Content Include="plugins\visualchars\plugin.min.js" />
+    <Content Include="plugins\wordcount\plugin.min.js" />
     <Content Include="skins\lightgray\fonts\tinymce-small.svg" />
     <Content Include="skins\lightgray\fonts\tinymce.svg" />
     <Content Include="skins\lightgray\content.inline.min.css" />
@@ -98,7 +163,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="langs\" />
-    <Folder Include="plugins\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
