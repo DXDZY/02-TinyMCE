@@ -4,7 +4,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>   
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <%--条件注释--%>
+    <!--[if lte IE 8]> 
+        <script type="text/ecmascript" src="js/respond.js"></script>
+    <![endif]-->
     <script type="text/javascript" src="tinymce.min.js"></script>
         <script>
             //tinymce.init({

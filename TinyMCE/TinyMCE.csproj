@@ -59,6 +59,7 @@
   <ItemGroup>
     <Content Include="css\content.css" />
     <Content Include="index.aspx" />
+    <Content Include="js\respond.js" />
     <Content Include="plugins\advlist\plugin.min.js" />
     <Content Include="plugins\anchor\plugin.min.js" />
     <Content Include="plugins\autolink\plugin.min.js" />
