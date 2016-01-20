@@ -69,8 +69,8 @@
                     customformat: { inline: 'span', styles: { color: '#00ff00', fontSize: '20px' }, attributes: { title: 'My custom format' }, classes: 'example1' },
                 },
                 content_css: [
-                  '//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
-                  '//www.tinymce.com/css/codepen.min.css'
+                  //'//fast.fonts.net/cssapi/e6dc9b99-64fe-4292-ad98-6974f93cd2a2.css',
+                  //'//www.tinymce.com/css/codepen.min.css'
                 ]
             });
     </script>
@@ -93,7 +93,7 @@
 <body>
     <h1>TinyMCE Quick Start Guide</h1>
     <form method="post">
-        <%--<textarea id="mytextarea">Hello, World!</textarea>--%>
+        <textarea id="mytextarea">Hello, World!</textarea>
     </form>
 </body>
 </html>
