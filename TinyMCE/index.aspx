@@ -6,6 +6,8 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>   
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery-form.js"></script>
     <%--条件注释--%>
     <!--[if lte IE 8]> 
         <script type="text/ecmascript" src="js/respond.js"></script>
@@ -84,20 +86,63 @@
     <script type="text/javascript">
         tinymce.init({
             selector: 'textarea',
+            height:500,
+            theme: 'modern',
+            //theme: 'advanced',
+            editor_selector : "wysiwyg",
             language: 'zh_CN',
             language_url: 'js/zh_CN.js',
-            //plugins: 'myplugin',
-            //external_plugins: {
-            //    'myplugin': '/js/myplugin/plugin.min.js'
-            //}
+            plugins: [
+              'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+              'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+              'save table contextmenu directionality emoticons template paste textcolor textpattern example'
+            ],
+            //jbimages
+            //theme_advanced_buttons1: "imagetools",
+            //toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image textcolor",
+            toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons',
+            file_browser_callback: function (field_name, url, type, win) {
+                if (type == 'image') $('#image_form input').click();
+            }
         });
     </script>
     <title></title>
 </head>
 <body>
     <h1>TinyMCE Quick Start Guide</h1>
-    <form method="post">
-        <textarea id="mytextarea">Hello, World!</textarea>
+    <form method="post" action="handler.ashx" id="textareaForm">
+        <textarea id="mytextarea" name="mytextarea">Hello, World!</textarea>
+
+        <input type="submit" value="提交" />
     </form>
+
+    <iframe id="form_target" name="form_target" style="display:none"></iframe>
+
+    <form id="image_form" action="uploadImage.ashx" target="form_target" method="post" enctype="multipart/form-data" style="width:0px;height:0;overflow:hidden">
+        <input name="image" type="file" onchange="$('#image_form').submit();" />
+    </form>
+    <script>
+        $('#image_form').ajaxForm(function (data) {
+            if (data != '0') {
+                $('.mce-textbox').eq(0).val(data).attr({
+                    'disabled': true
+                });
+            }
+        });
+
+        $('#textareaForm').submit(function (event) {
+            event.preventDefault();
+            tinyMCE.triggerSave();
+            var formData = $(this).serialize();
+            var responseData = {
+                formData : formData
+            };
+            formData = null;
+            var url = "handler.ashx";
+            $.post(url, responseData, function (data) {
+                alert(data);
+            });
+        });
+    </script>
 </body>
 </html>

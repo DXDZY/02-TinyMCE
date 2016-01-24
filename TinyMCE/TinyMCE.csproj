@@ -58,7 +58,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\content.css" />
+    <Content Include="images\1.jpg" />
     <Content Include="index.aspx" />
+    <Content Include="js\jquery-form.js" />
+    <Content Include="js\jquery.js" />
     <Content Include="js\respond.js" />
     <Content Include="js\zh_CN.js" />
     <Content Include="plugins\advlist\plugin.min.js" />
@@ -101,6 +104,39 @@
     <Content Include="plugins\image\plugin.min.js" />
     <Content Include="plugins\importcss\plugin.min.js" />
     <Content Include="plugins\insertdatetime\plugin.min.js" />
+    <Content Include="plugins\jbimages\ci\application\config\index.html" />
+    <Content Include="plugins\jbimages\ci\application\controllers\index.html" />
+    <Content Include="plugins\jbimages\ci\application\errors\index.html" />
+    <Content Include="plugins\jbimages\ci\application\helpers\index.html" />
+    <Content Include="plugins\jbimages\ci\application\index.html" />
+    <Content Include="plugins\jbimages\ci\application\language\english\index.html" />
+    <Content Include="plugins\jbimages\ci\application\language\french\index.html" />
+    <Content Include="plugins\jbimages\ci\application\language\russian\index.html" />
+    <Content Include="plugins\jbimages\ci\application\views\index.html" />
+    <Content Include="plugins\jbimages\ci\system\core\index.html" />
+    <Content Include="plugins\jbimages\ci\system\helpers\index.html" />
+    <Content Include="plugins\jbimages\ci\system\index.html" />
+    <Content Include="plugins\jbimages\ci\system\language\english\index.html" />
+    <Content Include="plugins\jbimages\ci\system\language\index.html" />
+    <Content Include="plugins\jbimages\ci\system\libraries\index.html" />
+    <Content Include="plugins\jbimages\css\dialog-v4.css" />
+    <Content Include="plugins\jbimages\css\dialog.css" />
+    <Content Include="plugins\jbimages\dialog-v4.htm" />
+    <Content Include="plugins\jbimages\dialog.htm" />
+    <Content Include="plugins\jbimages\editor_plugin.js" />
+    <Content Include="plugins\jbimages\editor_plugin_src.js" />
+    <Content Include="plugins\jbimages\img\jbimages-bw.gif" />
+    <Content Include="plugins\jbimages\img\spinner.gif" />
+    <Content Include="plugins\jbimages\js\dialog-v4.js" />
+    <Content Include="plugins\jbimages\js\dialog.js" />
+    <Content Include="plugins\jbimages\langs\en.js" />
+    <Content Include="plugins\jbimages\langs\en_dlg.js" />
+    <Content Include="plugins\jbimages\langs\fr.js" />
+    <Content Include="plugins\jbimages\langs\fr_dlg.js" />
+    <Content Include="plugins\jbimages\langs\ru.js" />
+    <Content Include="plugins\jbimages\langs\ru_dlg.js" />
+    <Content Include="plugins\jbimages\plugin.js" />
+    <Content Include="plugins\jbimages\plugin.min.js" />
     <Content Include="plugins\layer\plugin.min.js" />
     <Content Include="plugins\legacyoutput\plugin.min.js" />
     <Content Include="plugins\link\plugin.min.js" />
@@ -140,6 +176,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="handler.ashx.cs">
+      <DependentUpon>handler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -148,6 +187,9 @@
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="uploadImage.ashx.cs">
+      <DependentUpon>uploadImage.ashx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="skins\lightgray\fonts\tinymce-small.eot" />
@@ -156,6 +198,66 @@
     <Content Include="skins\lightgray\fonts\tinymce.eot" />
     <Content Include="skins\lightgray\fonts\tinymce.ttf" />
     <Content Include="skins\lightgray\fonts\tinymce.woff" />
+    <Content Include="handler.ashx" />
+    <Content Include="plugins\jbimages\.gitattributes" />
+    <Content Include="plugins\jbimages\.gitignore" />
+    <Content Include="plugins\jbimages\ci\application\.htaccess" />
+    <Content Include="plugins\jbimages\ci\application\config\autoload.php" />
+    <Content Include="plugins\jbimages\ci\application\config\config.php" />
+    <Content Include="plugins\jbimages\ci\application\config\constants.php" />
+    <Content Include="plugins\jbimages\ci\application\config\database.php" />
+    <Content Include="plugins\jbimages\ci\application\config\doctypes.php" />
+    <Content Include="plugins\jbimages\ci\application\config\foreign_chars.php" />
+    <Content Include="plugins\jbimages\ci\application\config\hooks.php" />
+    <Content Include="plugins\jbimages\ci\application\config\migration.php" />
+    <Content Include="plugins\jbimages\ci\application\config\mimes.php" />
+    <Content Include="plugins\jbimages\ci\application\config\profiler.php" />
+    <Content Include="plugins\jbimages\ci\application\config\routes.php" />
+    <Content Include="plugins\jbimages\ci\application\config\smileys.php" />
+    <Content Include="plugins\jbimages\ci\application\config\uploader_settings.php" />
+    <Content Include="plugins\jbimages\ci\application\config\user_agents.php" />
+    <Content Include="plugins\jbimages\ci\application\controllers\uploader.php" />
+    <Content Include="plugins\jbimages\ci\application\errors\error_404.php" />
+    <Content Include="plugins\jbimages\ci\application\errors\error_db.php" />
+    <Content Include="plugins\jbimages\ci\application\errors\error_general.php" />
+    <Content Include="plugins\jbimages\ci\application\errors\error_php.php" />
+    <Content Include="plugins\jbimages\ci\application\helpers\jbimages_helper.php" />
+    <Content Include="plugins\jbimages\ci\application\language\english\jbstrings_lang.php" />
+    <Content Include="plugins\jbimages\ci\application\language\french\imglib_lang.php" />
+    <Content Include="plugins\jbimages\ci\application\language\french\jbstrings_lang.php" />
+    <Content Include="plugins\jbimages\ci\application\language\french\upload_lang.php" />
+    <Content Include="plugins\jbimages\ci\application\language\russian\imglib_lang.php" />
+    <Content Include="plugins\jbimages\ci\application\language\russian\jbstrings_lang.php" />
+    <Content Include="plugins\jbimages\ci\application\language\russian\upload_lang.php" />
+    <Content Include="plugins\jbimages\ci\application\views\ajax_upload_result.php" />
+    <Content Include="plugins\jbimages\ci\application\views\blank.php" />
+    <Content Include="plugins\jbimages\ci\index.php" />
+    <Content Include="plugins\jbimages\ci\system\.htaccess" />
+    <Content Include="plugins\jbimages\ci\system\core\Benchmark.php" />
+    <Content Include="plugins\jbimages\ci\system\core\CodeIgniter.php" />
+    <Content Include="plugins\jbimages\ci\system\core\Common.php" />
+    <Content Include="plugins\jbimages\ci\system\core\Config.php" />
+    <Content Include="plugins\jbimages\ci\system\core\Controller.php" />
+    <Content Include="plugins\jbimages\ci\system\core\Exceptions.php" />
+    <Content Include="plugins\jbimages\ci\system\core\Hooks.php" />
+    <Content Include="plugins\jbimages\ci\system\core\Input.php" />
+    <Content Include="plugins\jbimages\ci\system\core\Lang.php" />
+    <Content Include="plugins\jbimages\ci\system\core\Loader.php" />
+    <Content Include="plugins\jbimages\ci\system\core\Model.php" />
+    <Content Include="plugins\jbimages\ci\system\core\Output.php" />
+    <Content Include="plugins\jbimages\ci\system\core\Router.php" />
+    <Content Include="plugins\jbimages\ci\system\core\Security.php" />
+    <Content Include="plugins\jbimages\ci\system\core\URI.php" />
+    <Content Include="plugins\jbimages\ci\system\core\Utf8.php" />
+    <Content Include="plugins\jbimages\ci\system\helpers\language_helper.php" />
+    <Content Include="plugins\jbimages\ci\system\language\english\imglib_lang.php" />
+    <Content Include="plugins\jbimages\ci\system\language\english\upload_lang.php" />
+    <Content Include="plugins\jbimages\ci\system\libraries\Image_lib.php" />
+    <Content Include="plugins\jbimages\ci\system\libraries\Upload.php" />
+    <Content Include="plugins\jbimages\config.php" />
+    <Content Include="plugins\jbimages\is_allowed.php" />
+    <Content Include="plugins\jbimages\readme" />
+    <Content Include="uploadImage.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -165,6 +267,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="langs\" />
+    <Folder Include="upload\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
