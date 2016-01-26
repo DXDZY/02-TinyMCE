@@ -13,6 +13,7 @@
     <script type="text/javascript" src="js/jquery-form.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/bootstrapValidator.js"></script>
+    <script type="text/javascript" src="js/customer.js"></script>
     
     <%--条件注释--%>
     <!--[if lte IE 8]> 
@@ -123,10 +124,23 @@
         </div>
         <div class="row">            
             <div class="col-sm-6">
-                1
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">一级菜单</label>
+                    <div class="col-lg-5">
+                        <div id="second-Menu-Drop-down">
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-6">
-                2
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">二级菜单</label>
+                    <div class="col-lg-5">
+                        <div id="second-level-Drop-down">
+                            <input type="text" class="form-control" name="secondMenuName" id="secondMenuName" />
+                        </div>                          
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row" id="title">
@@ -162,6 +176,7 @@
     </form>
     <script>
         $(document).ready(function () {
+            //$('#mytextarea').html('<p>123</p>');
             $('#image_form').ajaxForm(function (data) {
                 if (data != '0') {
                     $('.mce-textbox').eq(0).val(data).attr({
@@ -188,7 +203,7 @@
                 $.post(url, responseData, function (data) {
                     alert(data);
                 });
-                tinyMCE.setContent('123');
+                //tinyMCE.setContent('123');
             });
             
         });

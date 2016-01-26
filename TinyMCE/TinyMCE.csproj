@@ -66,6 +66,7 @@
     <Content Include="index.aspx" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrapValidator.js" />
+    <Content Include="js\customer.js" />
     <Content Include="js\jquery-form.js" />
     <Content Include="js\jquery.js" />
     <Content Include="js\respond.js" />
@@ -185,6 +186,9 @@
     <Compile Include="handler.ashx.cs">
       <DependentUpon>handler.ashx</DependentUpon>
     </Compile>
+    <Compile Include="handler\GetDataHandler.ashx.cs">
+      <DependentUpon>GetDataHandler.ashx</DependentUpon>
+    </Compile>
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -269,6 +273,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="handler\GetDataHandler.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
