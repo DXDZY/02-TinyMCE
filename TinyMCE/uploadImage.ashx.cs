@@ -27,8 +27,18 @@ namespace TinyMCE
                 {
                     Directory.CreateDirectory(uploadPath);
                 }
-                file.SaveAs(uploadPath + file.FileName);
-                context.Response.Write("images/" + file.FileName);
+                string fileName = string.Empty;
+                int fileSplit = file.FileName.LastIndexOf('\\');
+                if (fileSplit > 0)
+                {
+                    fileName = file.FileName.Substring(fileSplit + 1);
+                }
+                else
+                {
+                    fileName = file.FileName;
+                }
+                file.SaveAs(uploadPath + fileName);
+                context.Response.Write("images/" + fileName);
             }
             else
             {
