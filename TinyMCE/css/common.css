@@ -1,0 +1,15 @@
+﻿
+.title {
+    padding:2%;
+    border-radius:3px;
+    font-size:1.5em;
+    font-weight:bolder;
+    margin-top:2px;
+}
+.contentTitle {
+    background:#F5F5F5;
+    margin-bottom:0;
+}
+.contentSubmit {
+    padding-top:12px;
+}

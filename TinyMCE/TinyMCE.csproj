@@ -57,9 +57,15 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\bootstrapValidator.css" />
+    <Content Include="css\common.css" />
     <Content Include="css\content.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="images\1.jpg" />
     <Content Include="index.aspx" />
+    <Content Include="js\bootstrap.js" />
+    <Content Include="js\bootstrapValidator.js" />
     <Content Include="js\jquery-form.js" />
     <Content Include="js\jquery.js" />
     <Content Include="js\respond.js" />
@@ -258,6 +264,11 @@
     <Content Include="plugins\jbimages\is_allowed.php" />
     <Content Include="plugins\jbimages\readme" />
     <Content Include="uploadImage.ashx" />
+    <Content Include="css\bootstrap.css.map" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

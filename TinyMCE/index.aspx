@@ -6,8 +6,14 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>   
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/bootstrapValidator.css" />
+    <link rel="stylesheet" href="css/common.css" />
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/jquery-form.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/bootstrapValidator.js"></script>
+    
     <%--条件注释--%>
     <!--[if lte IE 8]> 
         <script type="text/ecmascript" src="js/respond.js"></script>
@@ -92,15 +98,14 @@
             editor_selector : "wysiwyg",
             language: 'zh_CN',
             language_url: 'js/zh_CN.js',
+            mode : "textareas",
             plugins: [
               'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
               'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
               'save table contextmenu directionality emoticons template paste textcolor textpattern example'
             ],
             //jbimages
-            //theme_advanced_buttons1: "imagetools",
-            //toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image textcolor",
-            toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons',
+            toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | forecolor backcolor emoticons | media fullpage link image | print preview',
             file_browser_callback: function (field_name, url, type, win) {
                 if (type == 'image') $('#image_form input').click();
             }
@@ -109,40 +114,98 @@
     <title></title>
 </head>
 <body>
-    <h1>TinyMCE Quick Start Guide</h1>
-    <form method="post" action="handler.ashx" id="textareaForm">
-        <textarea id="mytextarea" name="mytextarea">Hello, World!</textarea>
-
-        <input type="submit" value="提交" />
-    </form>
-
+<form method="post" action="handler.ashx" id="textareaForm">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <p class="bg-primary title">添加页面内容</p>
+            </div>
+        </div>
+        <div class="row">            
+            <div class="col-sm-6">
+                1
+            </div>
+            <div class="col-sm-6">
+                2
+            </div>
+        </div>
+        <div class="row" id="title">
+            <div class="col-sm-12">
+                <div class="form-group contentTitle">
+                    <label for="contentTitle">标题</label>
+                    <input type="text" class="form-control" name="contentTitle" id="contentTitle"  placeholder="标题内容">
+                  </div>
+            </div>
+        </div>
+        <div class="row" id="content">
+            <div class="col-sm-12">
+                <div class="form-group contentTitle">
+                    <label for="mytextarea">内容</label>               
+                    <textarea id="mytextarea" name="mytextarea"></textarea>
+                </div>                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-1 contentSubmit">
+                <input class="btn btn-primary" type="button" data-submit="submit" value="发布" />
+            </div>
+            <div class="col-sm-11 contentSubmit">
+                <input class="btn btn-primary" type="button" data-submit="submit" value="存为草稿" />
+            </div>
+        </div>
+    </div>
+</form>
     <iframe id="form_target" name="form_target" style="display:none"></iframe>
 
     <form id="image_form" action="uploadImage.ashx" target="form_target" method="post" enctype="multipart/form-data" style="width:0px;height:0;overflow:hidden">
         <input name="image" type="file" onchange="$('#image_form').submit();" />
     </form>
     <script>
-        $('#image_form').ajaxForm(function (data) {
-            if (data != '0') {
-                $('.mce-textbox').eq(0).val(data).attr({
-                    'disabled': true
+        $(document).ready(function () {
+            $('#image_form').ajaxForm(function (data) {
+                if (data != '0') {
+                    $('.mce-textbox').eq(0).val(data).attr({
+                        'disabled': true
+                    });
+                }
+            });
+            $('input[data-submit=submit]').click(function (event) {
+                var $this = $(this);
+                tinyMCE.triggerSave();
+                var formData = $('#textareaForm').serialize();
+                var submitType = 0;
+                if ($this.val() == '发布') {
+                    submitType = 1;
+                } else if ($this.val() == '存为草稿') {
+                    submitType = 0;
+                }
+                var responseData = {
+                    formData: formData,
+                    submitType: submitType
+                };
+                formData = null;
+                var url = "handler.ashx";
+                $.post(url, responseData, function (data) {
+                    alert(data);
                 });
-            }
+                tinyMCE.setContent('123');
+            });
+            
         });
 
-        $('#textareaForm').submit(function (event) {
-            event.preventDefault();
-            tinyMCE.triggerSave();
-            var formData = $(this).serialize();
-            var responseData = {
-                formData : formData
-            };
-            formData = null;
-            var url = "handler.ashx";
-            $.post(url, responseData, function (data) {
-                alert(data);
-            });
-        });
+        //$('#textareaForm').submit(function (event) {
+        //    event.preventDefault();
+        //    tinyMCE.triggerSave();
+        //    var formData = $(this).serialize();
+        //    var responseData = {
+        //        formData : formData
+        //    };
+        //    formData = null;
+        //    var url = "handler.ashx";
+        //    $.post(url, responseData, function (data) {
+        //        alert(data);
+        //    });
+        //});
     </script>
 </body>
 </html>
