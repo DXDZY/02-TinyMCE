@@ -57,12 +57,14 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="components\MySql.Data.dll" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrapValidator.css" />
     <Content Include="css\common.css" />
     <Content Include="css\content.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="images\1.jpg" />
+    <Content Include="images\toubiao.png" />
     <Content Include="index.aspx" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrapValidator.js" />
@@ -284,6 +286,16 @@
   <ItemGroup>
     <Folder Include="langs\" />
     <Folder Include="upload\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{eb03ec7a-c9d0-43a5-9b64-a995f6f8628d}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{b2d4efeb-d773-4528-8bee-bcef54595782}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

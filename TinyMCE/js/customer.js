@@ -3,16 +3,58 @@
  */
 //加载页面
 (function($){
-    $(document).ready(function(){
-
-        //tab
-        $(function() {
-            $( "#tabs" ).tabs({
-                event: "mouseover"
-            });
+    $(document).ready(function () {
+        //$('#mytextarea').html('<p>123</p>');
+        $('#image_form').ajaxForm(function (data) {
+            if (data != '0') {
+                $('.mce-textbox').eq(0).val(data).attr({
+                    'disabled': true
+                });
+            }
         });
-        ////初始化tooltip
-        $(function () { $("[data-toggle='tooltip']").tooltip(); });
+        $('input[data-submit=submit]').click(function (event) {
+            $('#menuForm')
+                    .data('bootstrapValidator')
+                    .updateStatus('secondMenuLevelName', 'NOT_VALIDATED')
+                    .validateField('secondMenuLevelName');
+            var $this = $(this);
+            tinyMCE.triggerSave();
+            var formData = $('#textareaForm').serialize();
+            var submitType = 0;
+            if ($this.val() == '发布') {
+                submitType = 1;
+            } else if ($this.val() == '存为草稿') {
+                submitType = 0;
+            }
+            var responseData = {
+                formData: formData,
+                submitType: submitType
+            };
+            formData = null;
+            var url = "handler.ashx";
+            $.post(url, responseData, function (data) {
+                alert(data);
+            });
+            //tinyMCE.setContent('123');
+        });
+        //form校验
+        $('#menuForm').bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                secondMenuLevelName: {
+                    validators: {
+                        notEmpty: {
+                            message: '一级菜单不能为空'
+                        }
+                    }
+                }
+            }
+        });
         //同步
         $.ajaxSetup({
             async : false
@@ -33,22 +75,6 @@
                 }
             });
             //$('#menu').load('dropdown-menu.aspx #menu-col');
-        }
-
-        //加载旋转木马
-        if($('#carousel').length > 0){
-            $('#carousel').load('index-carousel.aspx #carousel-example-generic');
-        }
-        //加载页头和页脚
-        if ($('#header').length > 0) {
-            $('#header').load('header-footer.aspx .header');
-        }
-        if ($('#footer').length > 0) {
-            $('#footer').load('header-footer.aspx .footer');
-        }
-        //加载首页右侧标签
-        if ($('#right-tab').length > 0) {
-            $('#right-tab').load('index-tab.aspx #index-tabs');
         }
         //菜单后台一级菜单下拉值初始化
         if ($('#first-Menu-Drop-down,#second-Menu-Drop-down').length > 0) {
@@ -78,8 +104,8 @@
                     if (htmlOrder != '') {
                         $('#fMenuOrder').show('slow');
                     }
-                    var firstHtml = html + '</ul></div><input type="text"class="form-control"name="firstMenuName" id="firstMenuName"/></div>';
-                    var secondHtml = html + '</ul></div><input type="text"class="form-control"name="secondMenuLevelName" readonly/></div>';
+                    var firstHtml = html + '</ul></div><input type="text"class="form-control" name="firstMenuName" id="firstMenuName"/></div>';
+                    var secondHtml = html + '</ul></div><input type="text"class="form-control" name="secondMenuLevelName" readonly/></div>';
                     $('#first-Menu-Drop-down').html(firstHtml);
                     $('#second-Menu-Drop-down').html(secondHtml);
                     //初始化一级菜单排序控件
@@ -99,87 +125,7 @@
 
 //添加事件,及页面加在后添加数据
 (function ($) {
-    $(document).ready(function () {
-        //启动旋转木马
-        $('.carousel').carousel();
-        //点击登录、注册
-        if ($('.header-login').length > 0) {
-            $('.header-login').click(function (event) {
-                var showModal = false;
-                var currentHeaderClick = '';
-                if (event.target.id == 'login') {
-                    $.ajaxSetup({
-                        async: false
-                    });
-                    $('#login-register').load('login.aspx #exampleModal-login');
-                    showModal = true;
-                    currentHeaderClick = 'login';
-                } else if (event.target.id == 'register') {
-                    $.ajaxSetup({
-                        async: false
-                    });
-                    $('#login-register').load('register.aspx #exampleModal-register');
-                    showModal = true;
-                    currentHeaderClick = 'register'
-                }
-                if (showModal) {
-                    $.getScript('js/bootstrapValidator.js');
-                    $.getScript('js/bootstrapValidatorRemote.js');
-                    //               $.getScript('css/bootstrap.css');
-                    $.getScript('css/bootstrapValidator.css');
-                    if (currentHeaderClick == 'login') {
-                        $('#exampleModal-login').modal();
-                    } else if (currentHeaderClick == 'register') {
-                        $('#exampleModal-register').modal();
-                    }
-                }
-            });
-        }
-        //获取详情列表
-        if ($('.pager').length > 0) {
-            $.getJSON('data/detail.json', function (data) {
-                $.each(data, function (index, item) {
-                    $('.pager').detaillist(item);
-                });
-            });
-        }
-        //论坛页面
-        $('.lt-title-right a').click(function () {
-            var $this = $(this);
-            var $img = $(this).find('img');
-            if ($img.hasClass('collapsed_no')) {
-                $img
-                    .attr({
-                        src: 'images/collapsed_yes.gif.png'
-                    })
-                    .removeClass()
-                    .addClass('collapsed_yes');
-                $this.closest('.lt-container-class').find('.lt-content').hide();
-            } else {
-                $img
-                    .attr({
-                        src: 'images/collapsed_no.gif.png'
-                    })
-                    .removeClass()
-                    .addClass('collapsed_no');
-                $this.closest('.lt-container-class').find('.lt-content').show();
-            }
-
-        });
-        $('.lt-container-class').each(function (index, item) {
-            var $item = $(item);
-            var $content = $(item).find('.lt-content');
-            if ($content.length > 1) {
-                $content.each(function (index, item1) {
-                    if (index == ($content.length - 1)) {
-                        return false;
-                    }
-                    $(item1).css({
-                        'border-bottom': '1px dashed #CDCDCD'
-                    });
-                })
-            }
-        });
+    $(document).ready(function () {        
         //菜单后台一级菜单下拉点击事件
         $(document).on('click', '.dropdown-menu a', function (event) {
             var $this = $(this);
@@ -220,25 +166,25 @@
             }
             if ($currentInput.attr('name') == 'secondMenuName') {
                 //验证菜单名称
-                $('#defaultFormS')
-                    .data('bootstrapValidator')
-                    .updateStatus('secondMenuName', 'NOT_VALIDATED')
-                    .validateField('secondMenuName');
+                //$('#defaultFormS')
+                //    .data('bootstrapValidator')
+                //    .updateStatus('secondMenuName', 'NOT_VALIDATED')
+                //    .validateField('secondMenuName');
                 //权限赋值
-                $('#secondMenuPower').val($this.attr('data-menuPower'));
+                //$('#secondMenuPower').val($this.attr('data-menuPower'));
                 //url赋值
-                $('#secondMenuNameUrl').val($this.attr('data-menuUrl'));
+                //$('#secondMenuNameUrl').val($this.attr('data-menuUrl'));
                 //是否冻结赋值
-                if ($this.attr('freeze') == '1') {
-                    $('#freezeSecondMenu').prop('checked', 'true');
-                } else {
-                    $('#freezeSecondMenu').removeAttr('checked');
-                }
+                //if ($this.attr('freeze') == '1') {
+                //    $('#freezeSecondMenu').prop('checked', 'true');
+                //} else {
+                //    $('#freezeSecondMenu').removeAttr('checked');
+                //}
                 //验证权限
-                $('#defaultFormS')
-                    .data('bootstrapValidator')
-                    .updateStatus('secondMenuPower', 'NOT_VALIDATED')
-                    .validateField('secondMenuPower');
+                //$('#defaultFormS')
+                //    .data('bootstrapValidator')
+                //    .updateStatus('secondMenuPower', 'NOT_VALIDATED')
+                //    .validateField('secondMenuPower');
             }
             else if ($currentInput.attr('name') == 'secondMenuPower') {
                 //验证权限
@@ -272,7 +218,7 @@
                                         //初始化二级菜单排序控件
                                         htmlOrder += '<li class="ui-state-default" data-parentID="' + itemChild.menu_parent_id + '">' + itemChild.menu_cn_name + '</li>';
                                     });
-                                    html += '</ul></div><input type="text" class="form-control" name="secondMenuName" id="secondMenuName"/></div>';
+                                    html += '</ul></div><input type="text" class="form-control" name="secondMenuName" id="secondMenuName" readonly /></div>';
                                     //初始化二级菜单排序控件
                                     $('#sortableS').html(htmlOrder);
                                     if (htmlOrder != '') {
@@ -281,185 +227,16 @@
                                     } 
                                 }
                                 else {
-                                    html = '<input type="text" class="form-control" name="secondMenuName" id="secondMenuName" />';
+                                    html = '<input type="text" class="form-control" name="secondMenuName" id="secondMenuName" readonly />';
                                     $('#sMenuOrder').hide('slow');
                                 }
                                 $('#second-level-Drop-down').html(html);
-                                $('#defaultFormS').bootstrapValidator({
-                                    //        live: 'disabled',
-                                    message: 'This value is not valid',
-                                    feedbackIcons: {
-                                        valid: 'glyphicon glyphicon-ok',
-                                        invalid: 'glyphicon glyphicon-remove',
-                                        validating: 'glyphicon glyphicon-refresh'
-                                    },
-                                    fields: {
-                                        secondMenuPower: {
-                                            validators: {
-                                                notEmpty: {
-                                                    message: '用户权限不能为空'
-                                                },
-                                                regexp: {
-                                                    regexp: /^游客$|^管理员$/,
-                                                    message: '权限值只能是游客或管理员'
-                                                }
-                                            }
-                                        },
-                                        secondMenuLevelName: {
-                                            validators: {
-                                                notEmpty: {
-                                                    message: '一级级菜单不能为空'
-                                                }
-                                            }
-                                        },
-                                        secondMenuName: {
-                                            validators: {
-                                                notEmpty: {
-                                                    message: '二级级菜单不能为空'
-                                                }
-                                            }
-                                        },
-                                        secondMenuNameUrl: {
-                                            validators: {
-                                            }
-                                        }
-                                    }
-                                }).on('success.form.bv', secondSubmitFun);
                             }                            
                         });                        
                     }                    
                 });
             }
         });
-        //一级菜单排序提交
-        $('#saveOrderF,#saveOrderS').click(function (event) {
-            var menuNameList = '';
-            var parentID = '';
-            var targetID = event.target.id;
-            //$('#' + targetID + ' li').each(function (index, item) {
-            //$('#' + targetID).closest('.row').find('.sortable li').each(function (index, item) {
-            //    menuNameList += $(item).text() + '&';
-            //    parentID = $(item).attr('data-parentID');
-            //});
-            if (targetID == 'saveOrderF') {
-                $('#sortableF li').each(function (index, item) {
-                    menuNameList += $(item).text() + '&';
-                    parentID = $(item).attr('data-parentID');
-                });
-            } else if (targetID == 'saveOrderS') {
-                $('#sortableS li').each(function (index, item) {
-                    menuNameList += $(item).text() + '&';
-                    parentID = $(item).attr('data-parentID');
-                });
-            }
-            menuNameList = menuNameList.substr(0, menuNameList.length - 1);
-            var requestData = {
-                cmd: 'menuOrder',
-                menuNameList: encodeURI(menuNameList),
-                parentID: parentID
-            };
-            var url = 'handler/GetDataHandler.ashx';
-            $.post(url, requestData, function (data) {
-                if (data == '1') {
-                    $('#' + targetID + 'Success').show('slow');
-                    setTimeout('hideMessageSuccess()', 3000);
-                } else {
-                    $('#' + targetID + 'Fail').show('slow');
-                    setTimeout('hideMessageFail()', 3000);
-                }
-            });
-        });
-        //删除一级菜单
-        $('#deleteFMenu,#deleteSMenu').click(function (event) {
-            var id = event.target.id;
-            var menuName = ''
-            var text = '';
-            var parentID = '';
-            var menuID = ''
-            if (id == 'deleteFMenu') {
-                menuName = $('#firstMenuName').val();
-                //parentID = $('#firstMenuName').attr('data-parentID');
-                menuID = $('#firstMenuName').attr('data-menuID');
-                text = '您确定要删除一级菜单【' + menuName + '】吗，删除该菜单后，子菜单也会一并删除。'
-            } else if (id == 'deleteSMenu') {
-                menuName = $('#secondMenuName').val();
-                //parentID = $('#secondMenuName').attr('data-parentID');
-                menuID = $('#secondMenuName').attr('data-menuID');
-                text = '您确定要删除二级菜单【' + menuName + '】吗。'
-            }
-            if (menuID != null && menuID != '') {
-                $('#warningModal').find('.container-fluid').text(text);
-                $('#deleteMenuTrue').attr({
-                    //menuName: menuName,
-                    //parentID: parentID,
-                    menuID: menuID
-                });
-                $('#warningModal').modal('show');
-            }
-        });
-        //确定删除菜单
-        $('#deleteMenuTrue').click(function (event) {
-            var $this = $(this);
-            var requestData = {
-                cmd: 'menuDelete',
-                //menuName: encodeURI($this.attr('menuName')),
-                //parentID: $this.attr('parentID'),
-                menuID: $this.attr('menuID')
-            };
-            var url = 'handler/GetDataHandler.ashx';
-            $.post(url, requestData, function (data) {
-                if (data == '1') {
-                    $('#deleteMenuSuccess').show('slow');
-                    setTimeout('hideMessageSuccess();', 3000);
-                } else {
-                    $('#deleteMenuFail').show('slow');
-                    setTimeout('hideMessageFail()', 3000);
-                }
-            });
-        });
+        
     });
 })(jQuery);
-//一级菜单提交时触发方法
-var firstSubmitFun = function (event) {
-    event.preventDefault();
-    var url = 'handler/GetDataHandler.ashx';
-    var $this = $(this);
-    var form = $this.serialize();
-    var requestData = {
-        cmd: 'firstMenuSave',
-        form: form
-    };
-    $.post(url, requestData, function (result) {
-        if (result == '1') {
-            $('#firstMenuSuccess').show('slow');
-            setTimeout('hideMessageSuccess()', 3000);
-        } else {
-            $('#firstMenuFail').show('slow');
-            setTimeout('hideMessageFail()', 3000);
-        }
-        $this.find('[type=submit]').removeAttr('disabled');
-        // ... process the result ...
-    });
-};
-//二级菜单提交时触发方法
-var secondSubmitFun = function (event) {
-    event.preventDefault();
-    var url = 'handler/GetDataHandler.ashx';
-    var $this = $(this);
-    var form = $this.serialize();
-    var requestData = {
-        cmd: 'secondMenuSave',
-        form: form
-    };
-    $.post(url, requestData, function (result) {
-        if (result == '1') {
-            $('#secondMenuSuccess').show('slow');
-            setTimeout('hideMessageSuccess()', 3000);
-        } else {
-            $('#secondMenuFail').show('slow');
-            setTimeout('hideMessageFail()', 3000);
-        }
-        $this.find('[type=submit]').removeAttr('disabled');
-        // ... process the result ...
-    });
-};

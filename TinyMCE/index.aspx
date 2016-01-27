@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/bootstrap.css" />
     <link rel="stylesheet" href="css/bootstrapValidator.css" />
     <link rel="stylesheet" href="css/common.css" />
+    <link rel="icon" href="images/toubiao.png" />
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/jquery-form.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
@@ -115,7 +116,7 @@
     <title></title>
 </head>
 <body>
-<form method="post" action="handler.ashx" id="textareaForm">
+
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
@@ -123,24 +124,24 @@
             </div>
         </div>
         <div class="row">            
-            <div class="col-sm-6">
+            <div class="col-sm-12 themenu">
+                <form id="menuForm" class="form-horizontal">
                 <div class="form-group">
-                    <label class="col-lg-3 control-label">一级菜单</label>
-                    <div class="col-lg-5">
+                    <label class="col-lg-1 control-label">一级菜单</label>
+                    <div class="col-lg-3">
                         <div id="second-Menu-Drop-down">
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-6">
                 <div class="form-group">
-                    <label class="col-lg-3 control-label">二级菜单</label>
-                    <div class="col-lg-5">
+                    <label class="col-lg-1 control-label">二级菜单</label>
+                    <div class="col-lg-3">
                         <div id="second-level-Drop-down">
-                            <input type="text" class="form-control" name="secondMenuName" id="secondMenuName" />
+                            <input type="text" class="form-control" name="secondMenuName" id="secondMenuName" readonly />
                         </div>                          
                     </div>
                 </div>
+                </form>
             </div>
         </div>
         <div class="row" id="title">
@@ -152,12 +153,14 @@
             </div>
         </div>
         <div class="row" id="content">
+            <form method="post" action="handler.ashx" id="textareaForm">
             <div class="col-sm-12">
                 <div class="form-group contentTitle">
                     <label for="mytextarea">内容</label>               
                     <textarea id="mytextarea" name="mytextarea"></textarea>
                 </div>                
             </div>
+            </form>
         </div>
         <div class="row">
             <div class="col-sm-1 contentSubmit">
@@ -168,45 +171,17 @@
             </div>
         </div>
     </div>
-</form>
+
     <iframe id="form_target" name="form_target" style="display:none"></iframe>
 
     <form id="image_form" action="uploadImage.ashx" target="form_target" method="post" enctype="multipart/form-data" style="width:0px;height:0;overflow:hidden">
         <input name="image" type="file" onchange="$('#image_form').submit();" />
     </form>
     <script>
-        $(document).ready(function () {
-            //$('#mytextarea').html('<p>123</p>');
-            $('#image_form').ajaxForm(function (data) {
-                if (data != '0') {
-                    $('.mce-textbox').eq(0).val(data).attr({
-                        'disabled': true
-                    });
-                }
-            });
-            $('input[data-submit=submit]').click(function (event) {
-                var $this = $(this);
-                tinyMCE.triggerSave();
-                var formData = $('#textareaForm').serialize();
-                var submitType = 0;
-                if ($this.val() == '发布') {
-                    submitType = 1;
-                } else if ($this.val() == '存为草稿') {
-                    submitType = 0;
-                }
-                var responseData = {
-                    formData: formData,
-                    submitType: submitType
-                };
-                formData = null;
-                var url = "handler.ashx";
-                $.post(url, responseData, function (data) {
-                    alert(data);
-                });
-                //tinyMCE.setContent('123');
-            });
+        //$(document).ready(function () {
             
-        });
+            
+        //});
 
         //$('#textareaForm').submit(function (event) {
         //    event.preventDefault();
