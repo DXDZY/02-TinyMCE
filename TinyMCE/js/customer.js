@@ -13,10 +13,10 @@
             }
         });
         $('input[data-submit=submit]').click(function (event) {
-            $('#menuForm')
-                    .data('bootstrapValidator')
-                    .updateStatus('secondMenuLevelName', 'NOT_VALIDATED')
-                    .validateField('secondMenuLevelName');
+            //$('#menuForm')
+            //        .data('bootstrapValidator')
+            //        .updateStatus('secondMenuLevelName', 'NOT_VALIDATED')
+            //        .validateField('secondMenuLevelName');
             var $this = $(this);
             tinyMCE.triggerSave();
             var formData = $('#textareaForm').serialize();
@@ -26,9 +26,15 @@
             } else if ($this.val() == '存为草稿') {
                 submitType = 0;
             }
+            var secondMenuLevelName = $('[name=secondMenuLevelName]').attr('data-menuid');
+            var secondMenuName = $('[name=secondMenuName]').attr('data-menuid');
+            var title = $('#contentTitle').val();
             var responseData = {
                 formData: formData,
-                submitType: submitType
+                submitType: submitType,
+                secondMenuLevelName:secondMenuLevelName,
+                secondMenuName: secondMenuName,
+                title: title
             };
             formData = null;
             var url = "handler.ashx";
