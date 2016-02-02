@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="bllContentOperation.cs" />
     <Compile Include="GetData.cs" />
     <Compile Include="JsonTools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

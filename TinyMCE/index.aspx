@@ -94,7 +94,7 @@
     <script type="text/javascript">
         tinymce.init({
             selector: 'textarea',
-            height:500,
+            height:350,
             theme: 'modern',
             //theme: 'advanced',
             editor_selector : "wysiwyg",

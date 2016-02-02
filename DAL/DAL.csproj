@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Common.cs" />
+    <Compile Include="dalContentOperation.cs" />
     <Compile Include="GetData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
